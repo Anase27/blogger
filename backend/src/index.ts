@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import { prismaClientMiddleware,authMiddleware } from './middlewares/middleware'
 import { userRouter } from './routes/user';
 import { blogRouter } from './routes/blog';
+import { cors } from 'hono/cors';
 
 
 const app = new Hono<{
@@ -25,7 +26,7 @@ app.get('/', (c) => {
 // app.get('', (c) => {
 //   return c.text('Hello hooman!')
 // });
-
+app.use('/*', cors())
 app.route('/user', userRouter);
 app.route('/blog', blogRouter);
 
