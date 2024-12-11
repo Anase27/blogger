@@ -77,7 +77,7 @@ userRouter.post('/signup',async (c) => {
         c.status(403);
         return c.json({error: "User not found"});
       }else if(user.password!=body.password){
-        c.status(505);
+        c.status(403);
         return c.json({error:"Password does not match"});
       }
   

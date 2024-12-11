@@ -1,26 +1,29 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { SignupInput } from "@anase/medium-common";
 import axios from "axios";
 import { BACKEND_URL } from "./config";
+import { Link } from "react-router-dom";
 
 function Signup() {
-  const passMatch = useRef<HTMLDivElement>(null);
+  // const passMatch = useRef<HTMLDivElement>(null);
   const[loading, setLoading] = useState(false);
 
   const submitSignUp = async(e: React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
-    
+    console.log(inputValues);
     setLoading((prev)=>!prev);
     try {
       const res = await axios.post(`${BACKEND_URL}/api/v1/user/signup`,inputValues);
       const jwt = res.data;
-      localStorage.setItem("token", jwt);
+      console.log(jwt.token);
+      localStorage.setItem("token", jwt.token);
 
       
     } catch (error) {
       console.log(error);
     }
     setLoading((prev)=>!prev);
+
 
   }
 
@@ -30,13 +33,14 @@ function Signup() {
     password:"",
     name:""
   });
+  const[error,setError] = useState("");
 
   useEffect(() => {
-    if (passMatch.current && confPass.length>0) {
+    if (inputValues.password.length>0 && confPass.length>0) {
       if (inputValues.password === confPass) {
-        passMatch.current.textContent = "";
+        setError("");
       } else {
-        passMatch.current.textContent = "Your password doesn't match";
+        setError("Your password doesn't match");
       }
     }
   }, [inputValues.password, confPass]);
@@ -50,18 +54,34 @@ function Signup() {
             <p>Signup to unlock access to <span className="highlighted-font">amazing</span> community and grow <span className="highlighted-font">10x</span> in x time.</p>
           </div>
 
-          <div className="signupInputs flex flex-col">
-            {/* <input type="text" name="username" id="signupUser" placeholder="Username" required/>
-            <input type="email" name="email" id="signupMail" placeholder="Email" required />
-            <input type="password" name="password" id="signupPass" placeholder="Password" required />
-            <input type="password" name="Confpassword" id="signupConfPass" placeholder="Confirm Password" required /> */}
-            <Inputs type="text" placeholder="Username" onChange={(e)=>{
+          <div className="signupInputs flex flex-col text-black">
+            <input type="text" name="username" id="signupUser" placeholder="Username" required onChange={(e)=>{
+              setInputValues({
+                ...inputValues,
+                name:e.target.value
+              })}}/>
+            <input type="email" name="email" id="signupMail" placeholder="Email" required onChange={(e)=>{
+              setInputValues({
+                ...inputValues,
+                email:e.target.value
+              })
+            }}/>
+            <input type="password" name="password" id="signupPass" placeholder="Password" title="Password must have 8 characters" pattern="^.{8,}$" required onChange={(e)=>{
+              setInputValues({
+                ...inputValues,
+                password:e.target.value
+              })
+            }}/>
+            <input type="password" name="Confpassword" id="signupConfPass" placeholder="Confirm Password" required onChange={(e)=>{
+              setConfPass(()=>e.target.value);
+            }}/>
+            {/* <Inputs type="text" placeholder="Username" onChange={(e)=>{
               setInputValues({
                 ...inputValues,
                 name:e.target.value
               })
-            }} />
-            <Inputs type="email" placeholder="Email" onChange={(e)=>{
+            }} /> */}
+            {/* <Inputs type="email" placeholder="Email" onChange={(e)=>{
               setInputValues({
                 ...inputValues,
                 email:e.target.value
@@ -76,13 +96,16 @@ function Signup() {
             }} />
             <Inputs type="password" placeholder="Confirm Password" onChange={(e)=>{
               setConfPass(()=>e.target.value);
-            }} />
+            }} /> */}
 
-            <div className="text-red">
-              <p ref={passMatch}></p>
-            </div>
+            {error && inputValues.password.length>0 && confPass.length>0 && <div className="text-red-500">
+              <p>{error}</p>
+            </div>}
 
-            <button type="submit" disabled={loading}>Signup</button>
+            <button type="submit" className="text-white" disabled={loading}>{loading ?"Loading...":"Submit"}</button>
+          </div>
+          <div>
+            <Link to={"/signin"}>Already have an acccount <span className="text-blue-600">Login</span></Link>
           </div>
         </form>
       </div>
