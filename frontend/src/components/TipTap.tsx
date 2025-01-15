@@ -1,4 +1,4 @@
-import { EditorProvider,FloatingMenu,BubbleMenu, useEditor, EditorContent } from "@tiptap/react";
+import {FloatingMenu,BubbleMenu, useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 
 const extensions = [StarterKit];
