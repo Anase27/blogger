@@ -1,5 +1,6 @@
 import { useCurrentEditor } from "@tiptap/react"
 // import { cn } from "../utils/utils"
+import ImageHandler from "./ImageHandler"
 
 
 
@@ -9,6 +10,19 @@ const MenuBar = () => {
     if (!editor) {
       return null
     }
+
+    const imageUploader=(file:File) =>{
+      try {
+        const filereader = new FileReader();
+        filereader.onloadend = ()=>{
+          editor.chain().focus().setImage({src:filereader.result as string}).run();
+          console.log("Image uploaded successfuly");
+        }
+        filereader.readAsDataURL(file);
+      } catch (error) {
+        console.error("Error uploading image",error);
+      }
+    } 
   
     return (
       <div className="control-group">
@@ -172,6 +186,12 @@ const MenuBar = () => {
             className={editor.isActive('textStyle', { color: '#958DF1' }) ? 'is-active' : ''}
           >
             Purple
+          </button>
+          <ImageHandler imageVisualizer={imageUploader} />
+          <button
+            onClick={()=> console.log(editor.getJSON())}
+          >
+            output
           </button>
         </div>
       </div>

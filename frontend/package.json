@@ -12,6 +12,8 @@
   "dependencies": {
     "@anase/medium-common": "^1.0.2",
     "@tiptap/extension-color": "^2.11.2",
+    "@tiptap/extension-dropcursor": "^2.11.2",
+    "@tiptap/extension-image": "^2.11.2",
     "@tiptap/extension-list-item": "^2.11.2",
     "@tiptap/extension-ordered-list": "^2.11.2",
     "@tiptap/extension-text-style": "^2.11.2",
