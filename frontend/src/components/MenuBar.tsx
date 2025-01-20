@@ -67,6 +67,11 @@ const MenuBar = () => {
             Strike
           </button>
           <button
+            onClick={()=>editor.chain().focus().toggleUnderline().run()}          
+          >
+            Underline
+          </button>
+          <button
             onClick={() => editor.chain().focus().toggleCode().run()}
             disabled={
               !editor.can()
@@ -78,18 +83,6 @@ const MenuBar = () => {
             className={editor.isActive('code') ? 'is-active' : ''}
           >
             Code
-          </button>
-          <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>
-            Clear marks
-          </button>
-          <button onClick={() => editor.chain().focus().clearNodes().run()}>
-            Clear nodes
-          </button>
-          <button
-            onClick={() => editor.chain().focus().setParagraph().run()}
-            className={editor.isActive('paragraph') ? 'is-active' : ''}
-          >
-            Paragraph
           </button>
           <button
             onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
@@ -114,18 +107,6 @@ const MenuBar = () => {
             className={editor.isActive('heading', { level: 4 }) ? 'is-active' : ''}
           >
             H4
-          </button>
-          <button
-            onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
-            className={editor.isActive('heading', { level: 5 }) ? 'is-active' : ''}
-          >
-            H5
-          </button>
-          <button
-            onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
-            className={editor.isActive('heading', { level: 6 }) ? 'is-active' : ''}
-          >
-            H6
           </button>
           <button
             onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -153,33 +134,6 @@ const MenuBar = () => {
           </button>
           <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
             Horizontal rule
-          </button>
-          <button onClick={() => editor.chain().focus().setHardBreak().run()}>
-            Hard break
-          </button>
-          <button
-            onClick={() => editor.chain().focus().undo().run()}
-            disabled={
-              !editor.can()
-                .chain()
-                .focus()
-                .undo()
-                .run()
-            }
-          >
-            Undo
-          </button>
-          <button
-            onClick={() => editor.chain().focus().redo().run()}
-            disabled={
-              !editor.can()
-                .chain()
-                .focus()
-                .redo()
-                .run()
-            }
-          >
-            Redo
           </button>
           <button
             onClick={() => editor.chain().focus().setColor('#958DF1').run()}

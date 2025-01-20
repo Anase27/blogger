@@ -1,11 +1,12 @@
-import { EditorProvider, FloatingMenu } from "@tiptap/react";
+import { EditorProvider} from "@tiptap/react";
 import MenuBar from "./MenuBar";
 import StarterKit from "@tiptap/starter-kit";
 import { Color } from '@tiptap/extension-color'
 import ListItem from '@tiptap/extension-list-item'
 import TextStyle from '@tiptap/extension-text-style'
 import Image from "@tiptap/extension-image";
-import Dropcursor from "@tiptap/extension-dropcursor";
+// import Dropcursor from "@tiptap/extension-dropcursor";
+import Underline from "@tiptap/extension-underline";
 
 const extensions = [
   Color.configure({ types: [TextStyle.name, ListItem.name] }),
@@ -21,13 +22,11 @@ const extensions = [
       },
   }),
   Image,
-  Dropcursor
+  // Dropcursor,
+  Underline
 ];
 
-const content = `
-<h2>
-  Hi there,
-</h2>
+const content = `<h2>Hi there,</h2>
 <p>
   this is a <em>basic</em> example of <strong>Tiptap</strong>. Sure, there are all kind of basic text styles you’d probably expect from a text editor. But wait until you see the lists:
 </p>
@@ -63,60 +62,10 @@ const RTE = () =>{
     return (
 
         <div className="p-10">
-            {/* <p>befor content </p>
-                <EditorContent editor={editor} />
-                <BubbleMenu editor={editor}>the bubble menu</BubbleMenu>
-            <p>after content </p> */}
-              <FloatingMenu editor={null}> the floating menu</FloatingMenu>	
+            {/* <FloatingMenu editor={null}>the floating menu</FloatingMenu> */}
             <EditorProvider slotBefore={<MenuBar />} extensions={extensions} content={content}></EditorProvider>
         </div>
     )
 }
 
 export default RTE;
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import './styles.scss'
-
-// import { Color } from '@tiptap/extension-color'
-// import ListItem from '@tiptap/extension-list-item'
-// import TextStyle from '@tiptap/extension-text-style'
-// import { EditorProvider, useCurrentEditor } from '@tiptap/react'
-// // import StarterKit from '@tiptap/starter-kit'
-// import React from 'react'
-
-
-
-// const extensions = [
-//   Color.configure({ types: [TextStyle.name, ListItem.name] }),
-//   TextStyle.configure({ types: [ListItem.name] }),
-//   StarterKit.configure({
-//     bulletList: {
-//       keepMarks: true,
-//       keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
-//     },
-//     orderedList: {
-//       keepMarks: true,
-//       keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
-//     },
-//   }),
-// ]
-
-
-
-// export default () => {
-//   return (
-//     <EditorProvider slotBefore={<MenuBar />} extensions={extensions} content={content}></EditorProvider>
-//   )
-// }

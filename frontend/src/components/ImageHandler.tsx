@@ -27,7 +27,7 @@ const ImageHandler = ({imageVisualizer}:ImageHandlerType)=>{
     }
 
     return(
-        <div>
+        <>
             <input
              type="file"
              accept="image/*"
@@ -38,7 +38,7 @@ const ImageHandler = ({imageVisualizer}:ImageHandlerType)=>{
             <button onClick={()=>imgref.current?.click()}>
                 Image
             </button>
-        </div>
+        </>
     )
 }
 
