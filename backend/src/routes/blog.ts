@@ -35,9 +35,11 @@ blogRouter.post('/',async (c) => {
     try {
         const prisma = c.get('prisma');
         const body = await c.req.json();
+        body.content = JSON.stringify(body.content);
+        console.log(body);
         const { success } = createBlogInput.safeParse(body);
         if(!success){
-            c.status(411);
+            c.status(400);
             return c.json({
               msg: "Inputs not correct",
             })

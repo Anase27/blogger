@@ -5,8 +5,8 @@ import { Color } from '@tiptap/extension-color'
 import ListItem from '@tiptap/extension-list-item'
 import TextStyle from '@tiptap/extension-text-style'
 import Image from "@tiptap/extension-image";
-// import Dropcursor from "@tiptap/extension-dropcursor";
 import Underline from "@tiptap/extension-underline";
+import axios from "axios";
 
 const extensions = [
   Color.configure({ types: [TextStyle.name, ListItem.name] }),
@@ -59,11 +59,27 @@ const RTE = () =>{
     //     extensions,
     //     content,
     //   })
+    const publishBlog = (blog:unknown)=>{
+      try {
+          const url : string = import.meta.env.VITE_BACKEND_URL;
+
+          console.log(JSON.stringify(blog));
+          console.log("kjfalio");
+          // console.log(url);
+          axios.post(`${url}/api/v1/blog/`,blog,{
+            headers:{
+              Authorization: localStorage.getItem('token')
+            }
+          })
+      } catch (error) {
+          console.error(error);
+      }
+  }
     return (
 
         <div className="p-10">
             {/* <FloatingMenu editor={null}>the floating menu</FloatingMenu> */}
-            <EditorProvider slotBefore={<MenuBar />} extensions={extensions} content={content}></EditorProvider>
+            <EditorProvider slotBefore={<MenuBar blogPublisher={publishBlog}/>} extensions={extensions} content={content}></EditorProvider>
         </div>
     )
 }

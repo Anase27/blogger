@@ -22,7 +22,7 @@ const Signin = () => {
             e.preventDefault();
             const res = await axios.post(`${BACKEND_URL}/api/v1/user/signin`,inputValues);
             const jwt = res.data;
-            localStorage.setItem("token",jwt.token);
+            localStorage.setItem("token",`Bearer ${jwt.token}`);
             // navigate("/blogs")
             
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

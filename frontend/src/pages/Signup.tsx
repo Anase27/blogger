@@ -16,7 +16,7 @@ function Signup() {
       const res = await axios.post(`${BACKEND_URL}/api/v1/user/signup`,inputValues);
       const jwt = res.data;
       console.log(jwt.token);
-      localStorage.setItem("token", jwt.token);
+      localStorage.setItem("token", `Bearer ${jwt.token}`);
 
       
     } catch (error) {

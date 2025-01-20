@@ -2,9 +2,12 @@ import { useCurrentEditor } from "@tiptap/react"
 // import { cn } from "../utils/utils"
 import ImageHandler from "./ImageHandler"
 
+interface MenuBarProps{
+  blogPublisher: (blog:unknown)=>void
+}
 
 
-const MenuBar = () => {
+const MenuBar = ({blogPublisher}:MenuBarProps) => {
     const { editor } = useCurrentEditor()
   
     if (!editor) {
@@ -143,7 +146,11 @@ const MenuBar = () => {
           </button>
           <ImageHandler imageVisualizer={imageUploader} />
           <button
-            onClick={()=> console.log(editor.getJSON())}
+            onClick={()=> {
+              // console.log(typeof editor.getJSON())
+              blogPublisher(editor.getJSON())
+
+            }}
           >
             output
           </button>
