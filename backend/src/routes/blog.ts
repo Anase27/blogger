@@ -42,7 +42,6 @@ blogRouter.post('/',async (c) => {
             c.status(400);
             return c.json({
               msg: "Inputs not correct",
-              success
             })
         }
         const userId = c.get('userId');
@@ -68,7 +67,7 @@ blogRouter.post('/',async (c) => {
         error
       })
     }
-});
+  });
   
 blogRouter.put('/',async (c) => {
     try {
@@ -114,7 +113,7 @@ blogRouter.get('/:blogId',async (c) => {
                 id
             }
         });
-        return c.json((post));
+        return c.json(post);
     } catch (error) {
         c.status(503);
         return c.json({

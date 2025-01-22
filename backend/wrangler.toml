@@ -3,8 +3,8 @@ compatibility_date = "2024-08-13"
 node_compat = true
 
 [vars]
-DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiMzE3NzhjMjktOWU2ZC00YWQ2LTkxMWYtMTJlY2M4M2VkYzNhIiwidGVuYW50X2lkIjoiMzc5ZjI3NTc5NjQzYmNmYWU2YmM0NmI1MjJkNzg0NzU5MDQ3OWI4ZmM0ODQxODgwZjczNzQ2MzE3YjA0MTJkZCIsImludGVybmFsX3NlY3JldCI6IjM4Yzc2YTY1LTE4N2MtNDI5NC1iNmIyLWE5NzE5Njg5ZGMwNiJ9.IkTYBmIg7HKzBH0ZtLhrSqlMj1gvdN621mxg7LEeSVg"
-JWT_SECRET = "!@#tfhjko*utgib8709NO"
+DATABASE_URL=""
+JWT_SECRET = ""
 
 
 # [[kv_namespaces]]
