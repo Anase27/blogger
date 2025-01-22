@@ -2,8 +2,8 @@ import { EditorProvider} from "@tiptap/react";
 import MenuBar from "./MenuBar";
 import StarterKit from "@tiptap/starter-kit";
 import { Color } from '@tiptap/extension-color'
-import TextStyle from '@tiptap/extension-text-style'
 import ListItem from '@tiptap/extension-list-item'
+import TextStyle from '@tiptap/extension-text-style'
 import Image from "@tiptap/extension-image";
 import Underline from "@tiptap/extension-underline";
 import axios from "axios";
