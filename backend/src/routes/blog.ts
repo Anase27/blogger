@@ -1,6 +1,10 @@
 import { Hono } from 'hono';
 import { authMiddleware } from '../middlewares/middleware';
 import { updateBlogInput, createBlogInput } from '@anase/medium-common';
+import { generateHTML } from '@tiptap/html';
+import StarterKit from '@tiptap/starter-kit';
+import Image from "@tiptap/extension-image";
+import Underline from "@tiptap/extension-underline";
 
 export const blogRouter = new Hono<{
     Bindings: {
@@ -113,7 +117,17 @@ blogRouter.get('/:blogId',async (c) => {
                 id
             }
         });
-        return c.json(post);
+        if(!post){
+            c.status(404);
+            return c.json({
+                msg:"post id is invalid"
+            });
+        }
+        return c.html(generateHTML(JSON.parse(post.content),[
+            StarterKit,
+            Image,
+            Underline
+        ]));
     } catch (error) {
         c.status(503);
         return c.json({
