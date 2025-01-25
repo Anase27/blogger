@@ -21,7 +21,7 @@
 }
 
 .ProseMirror {
-  @apply min-h-[200px] px-4 py-2;
+  @apply px-4 py-2;
 }
 
 .ProseMirror p.is-editor-empty:first-child::before {

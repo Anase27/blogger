@@ -13,11 +13,12 @@ function App() {
   <div>
       <BrowserRouter>
         <Routes>
-          {/* <Route path='/' element={<Demo />} /> */}
+          <Route path='/' element={<div>hellooo hooman</div>} />
           <Route path='/' element={<RTE />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/blog' element={<div>helloo</div>} />
+          <Route path='/blog/post' element={<RTE />} />
           <Route path='/blog/:id' element={<div>helloo</div>} />
         </Routes>
       </BrowserRouter>

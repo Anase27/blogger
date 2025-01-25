@@ -1,30 +1,8 @@
-import { EditorProvider} from "@tiptap/react";
+import { EditorProvider, useEditor} from "@tiptap/react";
 import MenuBar from "./MenuBar";
-import StarterKit from "@tiptap/starter-kit";
-import { Color } from '@tiptap/extension-color'
-import ListItem from '@tiptap/extension-list-item'
-import TextStyle from '@tiptap/extension-text-style'
-import Image from "@tiptap/extension-image";
-import Underline from "@tiptap/extension-underline";
 import axios from "axios";
+import getExtension from "../utils/tipTapExtensions";
 
-const extensions = [
-  Color.configure({ types: [TextStyle.name, ListItem.name] }),
-  TextStyle.configure({ types: [ListItem.name] }),
-  StarterKit.configure({
-      bulletList: {
-          keepMarks: true,
-          keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
-      },
-      orderedList: {
-          keepMarks: true,
-          keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
-      },
-  }),
-  Image,
-  // Dropcursor,
-  Underline
-];
 
 const content = `<h2>Hi there,</h2>
 <p>
@@ -59,6 +37,15 @@ const RTE = () =>{
     //     extensions,
     //     content,
     //   })
+
+    const titleEditor = useEditor({
+      extensions: getExtension("heading"),
+      content: "Title of the blog"
+    })
+    const blogEditor = useEditor({
+      extensions: getExtension("blog"),
+      content: content
+    })
     const publishBlog = (blog:unknown)=>{
       try {
           const url : string = import.meta.env.VITE_BACKEND_URL;
@@ -78,8 +65,8 @@ const RTE = () =>{
     return (
 
         <div className="p-10">
-            {/* <FloatingMenu editor={null}>the floating menu</FloatingMenu> */}
-            <EditorProvider slotBefore={<MenuBar blogPublisher={publishBlog}/>} extensions={extensions} content={content}></EditorProvider>
+            {/* <EditorProvider extensions={extensions}></EditorProvider> */}
+            <EditorProvider slotBefore={<MenuBar blogPublisher={publishBlog}/>} editor={blogEditor} ></EditorProvider>
         </div>
     )
 }
