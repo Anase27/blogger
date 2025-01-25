@@ -1,4 +1,5 @@
-import { EditorProvider, useEditor} from "@tiptap/react";
+import { Editor, EditorContent, EditorProvider, useEditor,FloatingMenu} from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "./MenuBar";
 import axios from "axios";
 import getExtension from "../utils/tipTapExtensions";
@@ -38,14 +39,7 @@ const RTE = () =>{
     //     content,
     //   })
 
-    const titleEditor = useEditor({
-      extensions: getExtension("heading"),
-      content: "Title of the blog"
-    })
-    const blogEditor = useEditor({
-      extensions: getExtension("blog"),
-      content: content
-    })
+    
     const publishBlog = (blog:unknown)=>{
       try {
           const url : string = import.meta.env.VITE_BACKEND_URL;
@@ -61,12 +55,23 @@ const RTE = () =>{
       } catch (error) {
           console.error(error);
       }
-  }
+    }
+    const titleEditor = useEditor({
+      extensions: getExtension("heading"),
+      content: "Title of the blog"
+    })
+    // const blogExtensions = getExtension("blog");
+    const blogEditor = useEditor({
+      extensions: getExtension("blog"),
+      content: content
+    })
+    console.log(blogEditor?.schema.spec.nodes);
     return (
-
         <div className="p-10">
-            {/* <EditorProvider extensions={extensions}></EditorProvider> */}
-            <EditorProvider slotBefore={<MenuBar blogPublisher={publishBlog}/>} editor={blogEditor} ></EditorProvider>
+
+          <EditorContent editor={titleEditor}></EditorContent>
+          <MenuBar blogPublisher={publishBlog} editor={blogEditor}></MenuBar>
+          <EditorContent editor={blogEditor}></EditorContent>
         </div>
     )
 }

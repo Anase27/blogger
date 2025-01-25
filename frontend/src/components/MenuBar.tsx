@@ -1,14 +1,15 @@
-import { useCurrentEditor } from "@tiptap/react"
+import { Editor, useCurrentEditor } from "@tiptap/react"
 // import { cn } from "../utils/utils"
 import ImageHandler from "./ImageHandler"
 
 interface MenuBarProps{
-  blogPublisher: (blog:unknown)=>void
+  blogPublisher: (blog:unknown)=>void,
+  editor:Editor | null
 }
 
 
-const MenuBar = ({blogPublisher}:MenuBarProps) => {
-    const { editor } = useCurrentEditor()
+const MenuBar = ({blogPublisher,editor}:MenuBarProps) => {
+    // const { editor } = useCurrentEditor()
   
     if (!editor) {
       return null

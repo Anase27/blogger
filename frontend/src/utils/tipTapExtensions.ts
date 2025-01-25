@@ -6,6 +6,7 @@ import Image from "@tiptap/extension-image";
 import Underline from "@tiptap/extension-underline";
 import Placeholder from "@tiptap/extension-placeholder";
 import Bold from "@tiptap/extension-bold";
+import Document from "@tiptap/extension-document";
 
 type editortype = "heading" | "blog";
 
@@ -22,19 +23,19 @@ const getExtension = (mode:editortype)=>{
 
 
   const blogExtension = [
-    Color.configure({ types: [TextStyle.name, ListItem.name] }),
-    TextStyle.configure({ types: [ListItem.name] }),
     StarterKit.configure({
       bold: false,
       bulletList: {
-          keepMarks: true,
-          keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+        keepMarks: true,
+        keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
       },
       orderedList: {
-          keepMarks: true,
-          keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+        keepMarks: true,
+        keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
       },
     }),
+    Color.configure({ types: [TextStyle.name, ListItem.name] }),
+    TextStyle.configure({ types: [ListItem.name] }),
     Image,
   ]
 
@@ -42,7 +43,12 @@ const getExtension = (mode:editortype)=>{
     return [...blogExtension,...baseExtensions,placeholder];
   }
 
-  return [...baseExtensions,placeholder];
+  return [
+    StarterKit,
+    // Document,
+    ...baseExtensions,
+    placeholder
+  ];
 }
 
 export default getExtension;
