@@ -4,7 +4,7 @@ node_compat = true
 
 [vars]
 DATABASE_URL=""
-JWT_SECRET = ""
+JWT_SECRET = "" 
 
 
 # [[kv_namespaces]]

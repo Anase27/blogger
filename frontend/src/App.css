@@ -35,7 +35,7 @@ body{
 .tiptap h5,
 .tiptap h6 {
     line-height: 1.1;
-    margin-top: 1rem;
+    margin-block: 1rem;
     text-wrap: pretty;
     font-weight: bold;
 }

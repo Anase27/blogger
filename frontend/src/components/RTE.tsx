@@ -1,8 +1,9 @@
-import { Editor, EditorContent, EditorProvider, useEditor,FloatingMenu} from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import { EditorContent, useEditor} from "@tiptap/react";
+
 import MenuBar from "./MenuBar";
 import axios from "axios";
 import getExtension from "../utils/tipTapExtensions";
+import { SelectionEditor } from "./SelectionEditor";
 
 
 const content = `<h2>Hi there,</h2>
@@ -34,17 +35,16 @@ const content = `<h2>Hi there,</h2>
 `
 
 const RTE = () =>{
-    // const editor = useEditor({
-    //     extensions,
-    //     content,
-    //   })
-
     
-    const publishBlog = (blog:unknown)=>{
+    const publishBlog = ()=>{
       try {
           const url : string = import.meta.env.VITE_BACKEND_URL;
-
-          console.log(JSON.stringify(blog));
+          const blog = {
+            title: JSON.stringify(titleEditor?.getJSON()),
+            content: JSON.stringify(blogEditor?.getJSON())
+          }
+          localStorage.setItem("tolen","dkalj");
+          console.log(blog);
           console.log("kjfalio");
           // console.log(url);
           axios.post(`${url}/api/v1/blog/`,blog,{
@@ -58,19 +58,20 @@ const RTE = () =>{
     }
     const titleEditor = useEditor({
       extensions: getExtension("heading"),
-      content: "Title of the blog"
+      content: ""
     })
     // const blogExtensions = getExtension("blog");
     const blogEditor = useEditor({
       extensions: getExtension("blog"),
       content: content
     })
-    console.log(blogEditor?.schema.spec.nodes);
+    // console.log(blogEditor?.schema.spec.nodes);
     return (
         <div className="p-10">
-
           <EditorContent editor={titleEditor}></EditorContent>
+
           <MenuBar blogPublisher={publishBlog} editor={blogEditor}></MenuBar>
+          <SelectionEditor editor={blogEditor}></SelectionEditor>
           <EditorContent editor={blogEditor}></EditorContent>
         </div>
     )

@@ -19,12 +19,22 @@
     @apply bg-background text-foreground;
   }
 }
-
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+ /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+}
+}
 .ProseMirror {
   @apply px-4 py-2;
 }
 
-.ProseMirror p.is-editor-empty:first-child::before {
+.ProseMirror .is-editor-empty:first-child::before {
   color: #adb5bd;
   content: attr(data-placeholder);
   float: left;
@@ -51,3 +61,8 @@
 /* .ProseMirror button{
   @apply bg-initial;
 } */
+
+.ProseMirror-focused{
+  border: none;
+  outline: transparent;
+}

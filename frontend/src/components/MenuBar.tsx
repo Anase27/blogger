@@ -1,9 +1,9 @@
-import { Editor, useCurrentEditor } from "@tiptap/react"
+import { Editor } from "@tiptap/react"
 // import { cn } from "../utils/utils"
 import ImageHandler from "./ImageHandler"
 
 interface MenuBarProps{
-  blogPublisher: (blog:unknown)=>void,
+  blogPublisher: ()=>void,
   editor:Editor | null
 }
 
@@ -107,12 +107,6 @@ const MenuBar = ({blogPublisher,editor}:MenuBarProps) => {
             H3
           </button>
           <button
-            onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
-            className={editor.isActive('heading', { level: 4 }) ? 'is-active' : ''}
-          >
-            H4
-          </button>
-          <button
             onClick={() => editor.chain().focus().toggleBulletList().run()}
             className={editor.isActive('bulletList') ? 'is-active' : ''}
           >
@@ -148,8 +142,7 @@ const MenuBar = ({blogPublisher,editor}:MenuBarProps) => {
           <ImageHandler imageVisualizer={imageUploader} />
           <button
             onClick={()=> {
-              // console.log(typeof editor.getJSON())
-              blogPublisher(editor.getJSON())
+              blogPublisher()
 
             }}
           >

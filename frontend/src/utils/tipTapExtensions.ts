@@ -11,20 +11,27 @@ import Document from "@tiptap/extension-document";
 type editortype = "heading" | "blog";
 
 const getExtension = (mode:editortype)=>{
+  const CustomDocument = Document.extend({
+    content: 'heading block*',
+  })
   const baseExtensions = [
-    Bold,
     Underline
   ];
 
 
   const placeholder = Placeholder.configure({
-    placeholder: mode==="heading"?"Title":"Share your story"
+    placeholder: ({node})=>{
+      console.log(node.type.name);
+      if(node.type.name == "heading" && mode == "heading"){
+        return "What's the title?"
+      }
+      return "Write your story here"
+    }
   });
 
 
   const blogExtension = [
     StarterKit.configure({
-      bold: false,
       bulletList: {
         keepMarks: true,
         keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
@@ -32,6 +39,9 @@ const getExtension = (mode:editortype)=>{
       orderedList: {
         keepMarks: true,
         keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+      },
+      heading:{
+        levels:[1,2,3],
       },
     }),
     Color.configure({ types: [TextStyle.name, ListItem.name] }),
@@ -44,7 +54,13 @@ const getExtension = (mode:editortype)=>{
   }
 
   return [
-    StarterKit,
+    CustomDocument,
+    StarterKit.configure({
+      document: false,
+      heading:{
+        levels:[1,2,3],
+      },
+    }),
     // Document,
     ...baseExtensions,
     placeholder
