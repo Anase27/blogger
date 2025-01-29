@@ -3,10 +3,15 @@ import { SignupInput } from "@anase/medium-common";
 import axios from "axios";
 import { BACKEND_URL } from "./config";
 import { Link } from "react-router-dom";
+import useValidateUser from "../hooks/useValidateUser";
 
 function Signup() {
   // const passMatch = useRef<HTMLDivElement>(null);
+  // useEffect(()=>{
+  //   useValidateUser()
+  // })
   const[loading, setLoading] = useState(false);
+  useValidateUser()
 
   const submitSignUp = async(e: React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
