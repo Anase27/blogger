@@ -11,14 +11,11 @@ const useValidateUser = ()=>{
             setIsVerified(false);
             return;
         }
-        const payload = {
-            token
-        }
-
+        
         try{
-            const res = await axios.post(`${BACKEND_URL}/api/v1/user/validate`,payload);
-
-            setIsVerified(res.data.signed)
+            const res = await axios.get(`http://127.0.0.1:8787/api/v1/user/validate`,{headers:{'Authorization': `Bearer ${token.split(" ").pop()}`}});
+            if(res.status == 200) setIsVerified(true);
+            else setIsVerified(false);
         }catch{
             setIsVerified(false)
         }
