@@ -33,7 +33,7 @@ blogRouter.get('/bulk',async (c) => {
 });
 
 
-blogRouter.use(authMiddleware)
+// blogRouter.use(authMiddleware)
 
 blogRouter.post('/',async (c) => {
     try {
@@ -123,11 +123,7 @@ blogRouter.get('/:blogId',async (c) => {
                 msg:"post id is invalid"
             });
         }
-        return c.html(generateHTML(JSON.parse(post.content),[
-            StarterKit,
-            Image,
-            Underline
-        ]));
+        return c.json(JSON.parse(post.content));
     } catch (error) {
         c.status(503);
         return c.json({
