@@ -5,16 +5,18 @@ import ImageHandler from "./ImageHandler"
 interface MenuBarProps{
   blogPublisher: ()=>void,
   editor:Editor | null
+  top: number
+  show: boolean
 }
 
 
-const MenuBar = ({blogPublisher,editor}:MenuBarProps) => {
+const MenuBar = ({blogPublisher,editor,top,show}:MenuBarProps) => {
     // const { editor } = useCurrentEditor()
   
-    if (!editor) {
+    if (!editor || !show) {
       return null
     }
-
+    
     const imageUploader=(file:File) =>{
       try {
         const filereader = new FileReader();

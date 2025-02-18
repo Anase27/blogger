@@ -5,7 +5,7 @@ import Signin from './pages/Signin'
 import RTE from './components/RTE'
 import AuthGaurd from './components/AuthGaurd'
 import BlogById from './pages/BlogById'
-
+import BlogList from './pages/BlogList'
 import './App.css'
 
 function App() {
@@ -17,17 +17,18 @@ function App() {
         <Routes>
           <Route path='/' element={<div>hellooo hooman</div>} />
           {/* <Route path='/' element={<RTE />} /> */}
-          <Route path='/blog' element={<div>helloo</div>} />
+          <Route path='/blog' element={<BlogList />} />
           <Route path='/blog/:id' element={<BlogById />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/signin' element={<Signin />} />
+          <Route path='/blog/post' element={<RTE />} />
 
 
           {/* Protected routes */}
           
-          <Route element={<AuthGaurd />}> 
+          {/* <Route element={<AuthGaurd />}> 
             <Route path='/blog/post' element={<RTE />} />
-          </Route>
+          </Route> */}
         </Routes>
       </BrowserRouter>
     </div>

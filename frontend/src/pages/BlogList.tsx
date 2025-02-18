@@ -3,9 +3,16 @@ import { BACKEND_URL } from "./config";
 import axios from "axios";
 
 
+type blogContent = {
+    id: string,
+    title: string,
+    content: string,
+    published: boolean,
+    authorId: string
+};
 const BlogList = ()=>{
 
-    const [blogs,setBlogs] = useState();
+    const [blogs,setBlogs] = useState<blogContent[]>();
 
     useEffect(()=>{
         const getBlogs = async ()=>{
@@ -14,7 +21,8 @@ const BlogList = ()=>{
         }
         getBlogs();
 
-    },[])
+    },[]);
+
     if(!blogs) return <div>Loading...</div>
     return(
         <>
@@ -36,3 +44,5 @@ const BlogList = ()=>{
         </>
     )
 }
+
+export default BlogList;

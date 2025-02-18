@@ -4,7 +4,13 @@ import MenuBar from "./MenuBar";
 import axios from "axios";
 import getExtension from "../utils/tipTapExtensions";
 import { SelectionEditor } from "./SelectionEditor";
+import { useState } from "react";
 
+
+interface FloatingButtonProps {
+  top: number
+  show: boolean
+}
 
 const content = `<h2>Hi there,</h2>
 <p>
@@ -35,6 +41,11 @@ const content = `<h2>Hi there,</h2>
 `
 
 const RTE = () =>{
+
+  const [floatingButton,setFloatingButton] = useState<FloatingButtonProps>({
+    top:0,
+    show: false
+  })
     
     const publishBlog = ()=>{
       try {
@@ -60,11 +71,51 @@ const RTE = () =>{
       extensions: getExtension("heading"),
       content: ""
     })
+
+
     // const blogExtensions = getExtension("blog");
+
+
+
     const blogEditor = useEditor({
       extensions: getExtension("blog"),
-      content: content
-    })
+      content: content,
+      onFocus: ({ editor }) => {
+        // Show floating button on initial focus
+        const selection = editor.view.state.selection
+        updateFloatingButton(editor, selection)
+        // if (selection.empty) {
+        // }
+      },
+      onUpdate: ({ editor }) => {
+        const selection = editor.view.state.selection
+        updateFloatingButton(editor, selection)
+        // if (selection.empty) {
+        // }
+      },
+    });
+
+
+
+
+    const updateFloatingButton = (editor: any, selection: any) => {
+      const pos = editor.view.coordsAtPos(selection.from)
+      const dom = editor.view.domAtPos(selection.from)
+      const parentNode = (dom.node as Node).parentNode as HTMLElement
+      
+      if (parentNode) {
+        const editorElement = editor.view.dom as HTMLElement
+        const editorRect = editorElement.getBoundingClientRect()
+        const relativeTop = pos.top - editorRect.top + editorElement.scrollTop
+  
+        setFloatingButton({
+          top: relativeTop,
+          show: true
+        })
+      }
+    }
+
+
     // console.log(blogEditor?.schema.spec.nodes);
     return (
         <div className="p-10">
