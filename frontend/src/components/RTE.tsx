@@ -89,6 +89,7 @@ const RTE = () =>{
       },
       onUpdate: ({ editor }) => {
         const selection = editor.view.state.selection
+        // const s = editor.view.state
         updateFloatingButton(editor, selection)
         // if (selection.empty) {
         // }
@@ -99,6 +100,7 @@ const RTE = () =>{
 
 
     const updateFloatingButton = (editor: any, selection: any) => {
+
       const pos = editor.view.coordsAtPos(selection.from)
       const dom = editor.view.domAtPos(selection.from)
       const parentNode = (dom.node as Node).parentNode as HTMLElement
@@ -121,7 +123,7 @@ const RTE = () =>{
         <div className="p-10">
           <EditorContent editor={titleEditor}></EditorContent>
 
-          <MenuBar blogPublisher={publishBlog} editor={blogEditor}></MenuBar>
+          <MenuBar blogPublisher={publishBlog} editor={blogEditor} top={floatingButton.top} show={floatingButton.show} ></MenuBar>
           <SelectionEditor editor={blogEditor}></SelectionEditor>
           <EditorContent editor={blogEditor}></EditorContent>
         </div>
