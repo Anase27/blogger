@@ -72,23 +72,32 @@ const RTE = () =>{
       content: ""
     })
 
-
-    // const blogExtensions = getExtension("blog");
-
-
-
     const blogEditor = useEditor({
       extensions: getExtension("blog"),
       content: content,
       onFocus: ({ editor }) => {
         // Show floating button on initial focus
         const selection = editor.view.state.selection
+        // console.log(selection);
         updateFloatingButton(editor, selection)
         // if (selection.empty) {
         // }
       },
+      onBlur: ({event}) => {
+        const relatedTarget = event.relatedTarget as HTMLElement;
+        console.log(relatedTarget);
+        console.log(!relatedTarget?.closest('.floating-menu'));
+        // if(!relatedTarget?.closest('.floating-menu')){
+        //   setFloatingButton(prev => ({...prev,show:false}))
+        // }
+      },
+      onSelectionUpdate: ({editor})=>{
+        const selection = editor.view.state.selection
+        updateFloatingButton(editor,selection)
+      },
       onUpdate: ({ editor }) => {
         const selection = editor.view.state.selection
+        // console.log(selection);
         // const s = editor.view.state
         updateFloatingButton(editor, selection)
         // if (selection.empty) {
@@ -107,6 +116,7 @@ const RTE = () =>{
       
       if (parentNode) {
         const editorElement = editor.view.dom as HTMLElement
+        // console.log(editorElement)
         const editorRect = editorElement.getBoundingClientRect()
         const relativeTop = pos.top - editorRect.top + editorElement.scrollTop
   
@@ -120,12 +130,20 @@ const RTE = () =>{
 
     // console.log(blogEditor?.schema.spec.nodes);
     return (
-        <div className="p-10">
+        <div className="p-10 relative">
           <EditorContent editor={titleEditor}></EditorContent>
 
-          <MenuBar blogPublisher={publishBlog} editor={blogEditor} top={floatingButton.top} show={floatingButton.show} ></MenuBar>
-          <SelectionEditor editor={blogEditor}></SelectionEditor>
-          <EditorContent editor={blogEditor}></EditorContent>
+          <div className="relative floating-menu">
+            <div>
+              <MenuBar blogPublisher={publishBlog} editor={blogEditor} top={floatingButton.top} show={floatingButton.show} ></MenuBar>
+            </div>
+            <div>
+              <SelectionEditor editor={blogEditor}></SelectionEditor>
+            </div>
+            <div>
+              <EditorContent editor={blogEditor}></EditorContent>
+            </div>
+          </div>
         </div>
     )
 }

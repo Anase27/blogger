@@ -21,7 +21,7 @@ const getExtension = (mode:editortype)=>{
 
   const placeholder = Placeholder.configure({
     placeholder: ({node})=>{
-      console.log(node.type.name);
+      // console.log(node.type.name);
       if(node.type.name == "heading" && mode == "heading"){
         return "What's the title?"
       }
