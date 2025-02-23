@@ -4,7 +4,7 @@ import MenuBar from "./MenuBar";
 import axios from "axios";
 import getExtension from "../utils/tipTapExtensions";
 import { SelectionEditor } from "./SelectionEditor";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 
 interface FloatingButtonProps {
@@ -46,7 +46,7 @@ const RTE = () =>{
     top:0,
     show: false
   })
-    
+    const imgref = useRef<HTMLInputElement>(null);
     const publishBlog = ()=>{
       try {
           const url : string = import.meta.env.VITE_BACKEND_URL;
@@ -85,8 +85,8 @@ const RTE = () =>{
       },
       onBlur: ({event}) => {
         const relatedTarget = event.relatedTarget as HTMLElement;
-        console.log(relatedTarget);
-        console.log(!relatedTarget?.closest('.floating-menu'));
+        // console.log(relatedTarget);
+        // console.log(!relatedTarget?.closest('.floating-menu'));
         // if(!relatedTarget?.closest('.floating-menu')){
         //   setFloatingButton(prev => ({...prev,show:false}))
         // }
@@ -106,6 +106,38 @@ const RTE = () =>{
     });
 
 
+
+    // IMAGE Funcitons
+    const imageUploader=(file:File) =>{
+      try {
+        const filereader = new FileReader();
+        filereader.onloadend = ()=>{
+          blogEditor?.chain().focus().setImage({src:filereader.result as string}).run();
+          console.log("Image uploaded successfuly");
+        }
+        filereader.readAsDataURL(file);
+      } catch (error) {
+        console.error("Error uploading image",error);
+      }
+    }
+    const fileChangeHandler = (event:React.ChangeEvent<HTMLInputElement>)=>{
+      console.log("Image input is clicked")
+      const file = event.target.files?.[0];
+      if(!file) return;
+
+      if(!file.type.startsWith('image/')){
+          console.log("only images are accepted");
+          return;
+      }
+      if(file.size>5*1024*1024){
+          console.log("Images file size should not exceed 5MB");
+          return;
+      }
+      imageUploader(file);
+      if (event.target) {
+          event.target.value = "";
+      }
+  }
 
 
     const updateFloatingButton = (editor: any, selection: any) => {
@@ -127,7 +159,10 @@ const RTE = () =>{
       }
     }
 
-
+    const inputRefCaller = ()=>{
+      console.log("clicked")
+      imgref.current?.click()
+    }
     // console.log(blogEditor?.schema.spec.nodes);
     return (
         <div className="p-10 relative">
@@ -135,7 +170,20 @@ const RTE = () =>{
 
           <div className="relative floating-menu">
             <div>
-              <MenuBar blogPublisher={publishBlog} editor={blogEditor} top={floatingButton.top} show={floatingButton.show} ></MenuBar>
+              <input
+                type="file"
+                accept="image/*"
+                ref = {imgref}
+                onChange={fileChangeHandler}
+                className="hidden"
+              />
+              <MenuBar 
+                blogPublisher={publishBlog}
+                editor={blogEditor} 
+                top={floatingButton.top} 
+                show={floatingButton.show} 
+                inputRefCaller = {inputRefCaller}
+              ></MenuBar>
             </div>
             <div>
               <SelectionEditor editor={blogEditor}></SelectionEditor>
