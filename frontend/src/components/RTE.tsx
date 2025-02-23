@@ -57,7 +57,6 @@ const RTE = () =>{
           localStorage.setItem("tolen","dkalj");
           console.log(blog);
           console.log("kjfalio");
-          // console.log(url);
           axios.post(`${url}/api/v1/blog/`,blog,{
             headers:{
               Authorization: localStorage.getItem('token')
@@ -76,20 +75,17 @@ const RTE = () =>{
       extensions: getExtension("blog"),
       content: content,
       onFocus: ({ editor }) => {
-        // Show floating button on initial focus
         const selection = editor.view.state.selection
-        // console.log(selection);
         updateFloatingButton(editor, selection)
-        // if (selection.empty) {
-        // }
+
       },
       onBlur: ({event}) => {
         const relatedTarget = event.relatedTarget as HTMLElement;
-        // console.log(relatedTarget);
-        // console.log(!relatedTarget?.closest('.floating-menu'));
-        // if(!relatedTarget?.closest('.floating-menu')){
-        //   setFloatingButton(prev => ({...prev,show:false}))
-        // }
+        console.log(relatedTarget);
+        console.log(!relatedTarget?.closest('[role="menu"]') && !relatedTarget?.closest('.floating-menu'));
+        if(!relatedTarget?.closest('[role="menu"]') && !relatedTarget?.closest('.floating-menu')){
+          setFloatingButton(prev => ({...prev,show:false}))
+        }
       },
       onSelectionUpdate: ({editor})=>{
         const selection = editor.view.state.selection
@@ -97,15 +93,28 @@ const RTE = () =>{
       },
       onUpdate: ({ editor }) => {
         const selection = editor.view.state.selection
-        // console.log(selection);
-        // const s = editor.view.state
         updateFloatingButton(editor, selection)
-        // if (selection.empty) {
-        // }
       },
     });
-
-
+    
+    
+    const updateFloatingButton = (editor: any, selection: any) => {
+  
+      const pos = editor.view.coordsAtPos(selection.from)
+      const dom = editor.view.domAtPos(selection.from)
+      const parentNode = (dom.node as Node).parentNode as HTMLElement
+      
+      if (parentNode) {
+        const editorElement = editor.view.dom as HTMLElement
+        const editorRect = editorElement.getBoundingClientRect()
+        const relativeTop = pos.top - editorRect.top + editorElement.scrollTop
+  
+        setFloatingButton({
+          top: relativeTop,
+          show: true
+        })
+      }
+    }
 
     // IMAGE Funcitons
     const imageUploader=(file:File) =>{
@@ -113,7 +122,7 @@ const RTE = () =>{
         const filereader = new FileReader();
         filereader.onloadend = ()=>{
           blogEditor?.chain().focus().setImage({src:filereader.result as string}).run();
-          console.log("Image uploaded successfuly");
+          // console.log("Image uploaded successfuly");
         }
         filereader.readAsDataURL(file);
       } catch (error) {
@@ -121,7 +130,7 @@ const RTE = () =>{
       }
     }
     const fileChangeHandler = (event:React.ChangeEvent<HTMLInputElement>)=>{
-      console.log("Image input is clicked")
+      // console.log("Image input is clicked")
       const file = event.target.files?.[0];
       if(!file) return;
 
@@ -137,38 +146,13 @@ const RTE = () =>{
       if (event.target) {
           event.target.value = "";
       }
-  }
-
-
-    const updateFloatingButton = (editor: any, selection: any) => {
-
-      const pos = editor.view.coordsAtPos(selection.from)
-      const dom = editor.view.domAtPos(selection.from)
-      const parentNode = (dom.node as Node).parentNode as HTMLElement
-      
-      if (parentNode) {
-        const editorElement = editor.view.dom as HTMLElement
-        // console.log(editorElement)
-        const editorRect = editorElement.getBoundingClientRect()
-        const relativeTop = pos.top - editorRect.top + editorElement.scrollTop
-  
-        setFloatingButton({
-          top: relativeTop,
-          show: true
-        })
-      }
     }
 
-    const inputRefCaller = ()=>{
-      console.log("clicked")
-      imgref.current?.click()
-    }
-    // console.log(blogEditor?.schema.spec.nodes);
     return (
         <div className="p-10 relative">
           <EditorContent editor={titleEditor}></EditorContent>
 
-          <div className="relative floating-menu">
+          <div className="relative floating-menu inside-rte">
             <div>
               <input
                 type="file"
@@ -182,7 +166,10 @@ const RTE = () =>{
                 editor={blogEditor} 
                 top={floatingButton.top} 
                 show={floatingButton.show} 
-                inputRefCaller = {inputRefCaller}
+                inputRefCaller = {()=>{
+                  console.log("clicked")
+                  imgref.current?.click()
+                }}
               ></MenuBar>
             </div>
             <div>

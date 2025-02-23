@@ -1,5 +1,4 @@
 import { Editor } from "@tiptap/react"
-// import { cn } from "../utils/utils"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,58 +7,24 @@ import {
   DropdownMenuTrigger
  } from "@/components/ui/dropdown-menu"
  import { Plus } from "lucide-react"
-// import { Ref } from "react"
 
 interface MenuBarProps{
   blogPublisher: ()=>void,
   editor:Editor | null
   top: number
   show: boolean
-  // fileChangeHandler: (event: React.ChangeEvent<HTMLInputElement>)=>void
   inputRefCaller: ()=>void
 }
 
 
 const MenuBar:React.FC<MenuBarProps> = ({blogPublisher,editor,top,show,inputRefCaller}) => {
-    // const { editor } = useCurrentEditor()
   
     if (!editor || !show) {
       return null
     }
-    
-  //   const imageUploader=(file:File) =>{
-  //     try {
-  //       const filereader = new FileReader();
-  //       filereader.onloadend = ()=>{
-  //         editor.chain().focus().setImage({src:filereader.result as string}).run();
-  //         console.log("Image uploaded successfuly");
-  //       }
-  //       filereader.readAsDataURL(file);
-  //     } catch (error) {
-  //       console.error("Error uploading image",error);
-  //     }
-  //   }
-  //   const fileChangeHandler = (event:React.ChangeEvent<HTMLInputElement>)=>{
-  //     console.log("Image input is clicked")
-  //     const file = event.target.files?.[0];
-  //     if(!file) return;
-
-  //     if(!file.type.startsWith('image/')){
-  //         console.log("only images are accepted");
-  //         return;
-  //     }
-  //     if(file.size>5*1024*1024){
-  //         console.log("Images file size should not exceed 5MB");
-  //         return;
-  //     }
-  //     imageUploader(file);
-  //     if (event.target) {
-  //         event.target.value = "";
-  //     }
-  // }
 
     const menuContent = (
-      <div className="floating-menu">
+      <div className="floating-menu inside-menu-content">
         <DropdownMenuGroup>
                 {/* <DropdownMenuItem>
                   <button
@@ -217,7 +182,7 @@ const MenuBar:React.FC<MenuBarProps> = ({blogPublisher,editor,top,show,inputRefC
   
     return (
       <div 
-      className="floating-menu absolute -left-5 transition-[top] duration-300 ease-in-out"
+      className="floating-menu inside-menubar absolute -left-5 transition-[top] duration-300 ease-in-out"
       style={{
         "top": `${top}px`,
         // "transition": 'top 0.3s ease-in-out'
@@ -225,7 +190,7 @@ const MenuBar:React.FC<MenuBarProps> = ({blogPublisher,editor,top,show,inputRefC
       >
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <button className="flex items-center justify-center w-8 h-8 rounded-full bg-white border border-gray-200 hover:bg-gray-50 transition-colors duration-200 shadow-sm">
+          <button className="relative flex items-center justify-center w-8 h-8 rounded-full bg-white border border-gray-200 hover:bg-gray-50 transition-colors duration-200 shadow-sm">
             <Plus className="w-4 h-4 text-gray-600" />
           </button>
         </DropdownMenuTrigger>
