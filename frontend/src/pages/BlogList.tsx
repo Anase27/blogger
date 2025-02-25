@@ -16,7 +16,8 @@ const BlogList = ()=>{
 
     useEffect(()=>{
         const getBlogs = async ()=>{
-            const res = await axios.get(`http://127.0.0.1:8787/api/v1/blog/bulk`);
+            // const res = await axios.get(`http://127.0.0.1:8787/api/v1/blog/bulk`);
+            const res = await axios.get(`${BACKEND_URL}/api/v1/blog/bulk`);
             setBlogs(res.data);
         }
         getBlogs();

@@ -21,14 +21,14 @@ function App() {
           <Route path='/blog/:id' element={<BlogById />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/signin' element={<Signin />} />
-          <Route path='/blog/post' element={<RTE />} />
+          {/* <Route path='/blog/post' element={<RTE />} /> */}
 
 
           {/* Protected routes */}
           
-          {/* <Route element={<AuthGaurd />}> 
+          <Route element={<AuthGaurd />}> 
             <Route path='/blog/post' element={<RTE />} />
-          </Route> */}
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

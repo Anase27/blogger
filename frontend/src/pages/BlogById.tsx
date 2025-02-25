@@ -11,7 +11,8 @@ const BlogById = ()=>{
     useEffect(()=>{
         const fetchBlog = async ()=>{
             // REPLACE WITH YOUR BACKEND URL
-            const res = await axios.get(`http://127.0.0.1:8787/api/v1/blog/${id}`);
+            // const res = await axios.get(`http://127.0.0.1:8787/api/v1/blog/${id}`);
+            const res = await axios.get(`${BACKEND_URL}/api/v1/blog/${id}`);
             setBlog(res.data);
         }
         fetchBlog();

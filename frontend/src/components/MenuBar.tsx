@@ -185,7 +185,6 @@ const MenuBar:React.FC<MenuBarProps> = ({blogPublisher,editor,top,show,inputRefC
       className="floating-menu inside-menubar absolute -left-5 transition-[top] duration-300 ease-in-out"
       style={{
         "top": `${top}px`,
-        // "transition": 'top 0.3s ease-in-out'
       }}
       >
       <DropdownMenu>
