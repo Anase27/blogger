@@ -7,6 +7,7 @@ import AuthGaurd from './components/AuthGaurd'
 import BlogById from './pages/BlogById'
 import BlogList from './pages/BlogList'
 import './App.css'
+import HomePage from './pages/HomePage'
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -15,7 +16,7 @@ function App() {
   <div>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<div>hellooo hooman</div>} />
+          <Route path='/' element={<HomePage />} />
           {/* <Route path='/' element={<RTE />} /> */}
           <Route path='/blog' element={<BlogList />} />
           <Route path='/blog/:id' element={<BlogById />} />
