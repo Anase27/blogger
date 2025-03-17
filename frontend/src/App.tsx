@@ -8,14 +8,17 @@ import BlogById from './pages/BlogById'
 import BlogList from './pages/BlogList'
 import './App.css'
 import HomePage from './pages/HomePage'
+import Nav from './components/Nav'
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
-  <div>
+  <div className='relative overscroll-none'>
       <BrowserRouter>
+       
         <Routes>
+          
           <Route path='/' element={<HomePage />} />
           {/* <Route path='/' element={<RTE />} /> */}
           <Route path='/blog' element={<BlogList />} />
@@ -31,6 +34,9 @@ function App() {
             <Route path='/blog/post' element={<RTE />} />
           </Route>
         </Routes>
+        <div className=''>
+          <Nav></Nav>
+        </div>
       </BrowserRouter>
     </div>
   )
