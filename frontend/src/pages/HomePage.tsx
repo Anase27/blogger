@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Code, Terminal, ChevronLeft,BookOpen, MoveDown } from "lucide-react";
+import { Terminal, ChevronLeft,BookOpen, MoveDown } from "lucide-react";
 
 const HomePage = ()=>{
     const [isLoaded,setIsLoading] = useState(false);
@@ -13,6 +13,9 @@ const HomePage = ()=>{
                 <div className="absolute inset-0 pointer-events-none">                    
                     <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px)] bg-[size:40px] bg-[position:center] opacity-90"></div>
                     <div className="absolute inset-0 bg-[linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:100%_40px] bg-[position:center] opacity-90"></div>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0">
+                    <div className="bg-gradient-to-t from-white to-transparent h-6 w-full"></div>
                 </div>
 
                 <div className="px-4 text-center">
@@ -41,6 +44,31 @@ const HomePage = ()=>{
                 </div>
                 
             </section>
+            <div>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+                <p>dkalj</p>
+            </div>
         </div>
     )
 }
