@@ -7,14 +7,14 @@ const Nav = ()=>{
     const [isMobile,setIsMobile] = useState(false);
 
     return(
-        <div className="fixed top-3 left-0 right-0 flex justify-center">
+        <div className="fixed top-3 left-0 right-0 flex justify-center items-center">
             <div className="w-full ">
-                <div className={`flex justify-between w-4/5 mx-auto px-4 py-2 bg-[linear-gradient(180deg,#aab6c822,#90a0b91a,#5d759b11)] backdrop-blur-md rounded-xl shadow-sm`}>
+                <div className={`flex justify-between w-4/5 mx-auto px-4 py-2 bg-[linear-gradient(180deg,#aab6c822,#90a0b91a,#5d759b11)] backdrop-blur-md rounded-xl shadow-sm items-center`}>
                     <div>
                         <p>Splat</p>
                     </div>
-                    <div className="hidden md:block">
-                        <Link to='/' className="rounded-xl before:content-[''] before:inset-0 before:bg-[#bad7f5]"><span>Sign Up</span></Link>
+                    <div className="hidden md:block relative text-white">
+                        <Link to='/' className="inline-block rounded-xl before:content-[''] before:absolute before:inset-0 before:bg-black before:rounded-xl px-4 py-2"><span className="relative">Sign Up</span></Link>
                     </div>
                     <div className="md:hidden">
                         <button onClick={()=>setIsMobile(!isMobile)}>
