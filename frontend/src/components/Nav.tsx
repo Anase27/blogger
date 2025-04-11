@@ -11,11 +11,25 @@ const Nav = ()=>{
             <div className="w-full ">
                 <div className={`flex justify-between w-4/5 mx-auto px-4 py-2 bg-[linear-gradient(180deg,#aab6c822,#90a0b91a,#5d759b11)] backdrop-blur-md rounded-xl shadow-sm items-center`}>
                     <div>
-                        <p>Splat</p>
+                        <Link to='/'>
+                            <p>Splat</p>
+                        </Link>
                     </div>
-                    <div className="hidden md:block relative text-white">
-                        <Link to='/' className="inline-block rounded-xl before:content-[''] before:absolute before:inset-0 before:bg-black before:rounded-xl px-4 py-2"><span className="relative">Sign Up</span></Link>
-                    </div>
+                        <div className={`relative hidden md:flex text-white gap-4`}>
+                            <div className="relative">
+                                <Link to='/' className="inline-block rounded-xl before:content-[''] before:absolute before:inset-0 before:bg-black before:rounded-xl px-4 py-2"><span className="relative">Home</span></Link>
+                            </div>
+                            <div className="relative">
+                                <Link to='/' className="inline-block rounded-xl before:content-[''] before:absolute before:inset-0 before:bg-black before:rounded-xl px-4 py-2"><span className="relative">About</span></Link>
+                            </div>
+                            <div className="relative">
+                                <Link to='/signup' className="inline-block rounded-xl before:content-[''] before:absolute before:inset-0 before:bg-black before:rounded-xl px-4 py-2"><span className="relative">Contact</span></Link>
+                            </div>
+                            
+                        </div>
+                        <div className="hidden md:block relative text-white">
+                            <Link to='/signup' className="inline-block rounded-xl before:content-[''] before:absolute before:inset-0 before:bg-black before:rounded-xl px-4 py-2"><span className="relative">Sign Up</span></Link>
+                        </div>
                     <div className="md:hidden">
                         <button onClick={()=>setIsMobile(!isMobile)}>
                             {
@@ -57,9 +71,11 @@ const Nav = ()=>{
                             >
                                 Contact
                             </Link>
-                            <button className="mt-2" onClick={() => setIsMobile(false)}>
-                                Start Writing
-                            </button>
+                            <Link to='/signin' className="">
+                                <button className="mt-2" onClick={() => setIsMobile(false)}>
+                                    Start Writing
+                                </button>
+                            </Link>
                         </nav>
                     </div>
                 </div>
