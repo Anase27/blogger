@@ -34,14 +34,14 @@ const Signin = () => {
     }
 
     return <>
-        <section className=" min-h-screen flex flex-col justify-center">
-                <div className="absolute inset-0 pointer-events-none">                    
-                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px)] bg-[size:40px] bg-[position:center] opacity-90"></div>
-                    <div className="absolute inset-0 bg-[linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:100%_40px] bg-[position:center] opacity-90"></div>
-                </div>
-                <div className="absolute bottom-0 left-0 right-0">
-                    <div className="bg-gradient-to-t from-white to-transparent h-6 w-full"></div>
-                </div>
+        <section className=" min-h-screen flex flex-col justify-center pt-20 pb-10">
+            <div className="absolute inset-0 pointer-events-none">                    
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px)] bg-[size:40px] bg-[position:center] opacity-90"></div>
+                <div className="absolute inset-0 bg-[linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:100%_40px] bg-[position:center] opacity-90"></div>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0">
+                <div className="bg-gradient-to-t from-white to-transparent h-6 w-full"></div>
+            </div>
             <div className="mx-auto px-4 z-10">
                 <div className="max-w-md mx-auto">
                     <div className="text-center mb-8">

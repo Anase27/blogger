@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BACKEND_URL } from "./config";
 import axios from "axios";
+import Nav from "@/components/Nav";
 
 
 type blogContent = {
@@ -41,6 +42,9 @@ const BlogList = ()=>{
                         )
                     })}
                 </ul>
+            </div>
+            <div className=''>
+                <Nav></Nav>
             </div>
         </>
     )

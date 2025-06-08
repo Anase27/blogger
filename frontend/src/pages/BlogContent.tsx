@@ -2,6 +2,7 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from "@tiptap/extension-image";
 import Underline from "@tiptap/extension-underline";
+import Nav from '@/components/Nav';
 
 
 interface BlogContentProps {
@@ -19,9 +20,14 @@ const BlogContent = ({ content }: BlogContentProps) => {
     return null;
   }
   return (
-    <div className="prose prose-lg max-w-4xl mx-auto">
-      <EditorContent editor={editor} />
-    </div>
+    <>
+      <div className="prose prose-lg max-w-4xl mx-auto">
+        <EditorContent editor={editor} />
+      </div>
+      <div className=''>
+        <Nav></Nav>
+      </div>
+    </>
   );
 };
 export default BlogContent;

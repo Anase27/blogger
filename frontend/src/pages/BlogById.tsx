@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { BACKEND_URL } from "./config";
 import axios from "axios";
 import BlogContent from "./BlogContent";
+import Nav from "@/components/Nav";
 
 const BlogById = ()=>{
     const {id} = useParams();
@@ -23,6 +24,9 @@ const BlogById = ()=>{
         <>
             <div>
                 <BlogContent content={blog}/> 
+            </div>
+            <div className=''>
+                <Nav></Nav>
             </div>
         </>
     )

@@ -11,7 +11,6 @@ import HomePage from './pages/HomePage'
 import Nav from './components/Nav'
 
 function App() {
-  // const [count, setCount] = useState(0)
 
   return (
   <div className='relative overscroll-none'>
@@ -34,9 +33,9 @@ function App() {
             <Route path='/blog/post' element={<RTE />} />
           </Route>
         </Routes>
-        <div className=''>
+        {/* <div className=''>
           <Nav></Nav>
-        </div>
+        </div> */}
       </BrowserRouter>
     </div>
   )

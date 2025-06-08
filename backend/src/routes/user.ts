@@ -36,7 +36,7 @@ userRouter.post('/signup',async (c) => {
       })
       if(user) throw "Email already exists";
       
-        user = await prisma.user.create({
+      user = await prisma.user.create({
         data:{
           email: body.email,
           password: body.password,

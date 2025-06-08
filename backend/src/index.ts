@@ -31,6 +31,4 @@ app.route('/user', userRouter);
 app.route('/blog', blogRouter);
 
 
-
-
 export default app
